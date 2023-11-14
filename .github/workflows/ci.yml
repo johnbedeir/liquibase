@@ -19,7 +19,7 @@ jobs:
 
     - name: Install Liquibase
       run: |
-        wget https://github.com/liquibase/liquibase/releases/download/v4.3.5/liquibase-4.3.5.tar.gz
+        wget https://github.com/liquibase/liquibase/releases/download/v4.25.0/liquibase-4.25.0.tar.gz
         sudo mkdir -p /opt/liquibase
         sudo tar -xvf liquibase-4.25.0.tar.gz -C /opt/liquibase
         liquibase --version
