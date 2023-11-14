@@ -22,6 +22,7 @@ jobs:
         wget https://github.com/liquibase/liquibase/releases/download/v4.25.0/liquibase-4.25.0.tar.gz
         sudo mkdir -p /opt/liquibase
         sudo tar -xvf liquibase-4.25.0.tar.gz -C /opt/liquibase
+        export PATH=$PATH:/opt/liquibase
         liquibase --version
 
     - name: Download MongoDB Driver
