@@ -33,4 +33,4 @@ jobs:
         wget https://github.com/liquibase/liquibase-mongodb/releases/download/v4.24.0/liquibase-mongodb-4.24.0-javadoc.jar
         export PATH=$PATH:/opt/liquibase
         export CLASSPATH=$CLASSPATH:mongo-java-driver-2.13.3.jar
-        liquibase --classpath=./mongo-java-driver-2.13.3.jar:./liquibase-mongodb-4.24.0-javadoc.jar --changeLogFile=changelog-mongodb.xml --url=mongodb+srv://${DATABASE_URL} update
+        liquibase --classpath=./mongo-java-driver-2.13.3.jar:./liquibase-mongodb-4.24.0-javadoc.jar --changeLogFile=changelog-mongodb.xml --url=${DATABASE_URL} update
