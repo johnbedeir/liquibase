@@ -30,7 +30,7 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         sudo mkdir -p /opt/liquibase/lib
-        cd liquibase/lib
+        cd /opt/liquibase/lib
         wget https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/2.13.3/mongo-java-driver-2.13.3.jar
         wget https://repo1.maven.org/maven2/org/liquibase/ext/liquibase-mongodb/4.24.0/liquibase-mongodb-4.24.0.jar
         export PATH=$PATH:/opt/liquibase
