@@ -25,16 +25,13 @@ jobs:
         export PATH=$PATH:/opt/liquibase
         liquibase --version
 
-    - name: Download MongoDB Driver
-      run: |
-        wget https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/2.13.3/mongo-java-driver-2.13.3.jar
-
     - name: Run Liquibase Update
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         LIQUIBASE_USERNAME: ${{ secrets.LIQUIBASE_USERNAME }}
         LIQUIBASE_PASSWORD: ${{ secrets.LIQUIBASE_PASSWORD }}
       run: |
+        wget https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/2.13.3/mongo-java-driver-2.13.3.jar
         export PATH=$PATH:/opt/liquibase
         export CLASSPATH=$CLASSPATH:mongo-java-driver-2.13.3.jar
         liquibase --classpath=./mongo-java-driver-2.13.3.jar --changeLogFile=changelog-mongodb.xml --url=jdbc:${DATABASE_URL} --username=${LIQUIBASE_USERNAME} --password=${LIQUIBASE_PASSWORD} update
