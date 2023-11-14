@@ -1,0 +1,39 @@
+name: Run Liquibase Migration
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  liquibase-migration:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Install Liquibase
+      run: |
+        wget https://github.com/liquibase/liquibase/releases/download/v4.3.5/liquibase-4.3.5.tar.gz
+        sudo mkdir -p /opt/liquibase
+        sudo tar -xvf liquibase-4.25.0.tar.gz -C /opt/liquibase
+        liquibase --version
+
+    - name: Download MongoDB Driver
+      run: |
+        wget https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/2.13.3/mongo-java-driver-2.13.3.jar
+
+    - name: Run Liquibase Update
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        LIQUIBASE_USERNAME: ${{ secrets.LIQUIBASE_USERNAME }}
+        LIQUIBASE_PASSWORD: ${{ secrets.LIQUIBASE_PASSWORD }}
+      run: |
+        export PATH=$PATH:/opt/liquibase
+        export CLASSPATH=$CLASSPATH:./mongodb-driver.jar
+        liquibase --classpath=./mongodb-driver.jar --changeLogFile=changelog-mongodb.xml --url=jdbc:${DATABASE_URL} --username=${LIQUIBASE_USERNAME} --password=${LIQUIBASE_PASSWORD} update

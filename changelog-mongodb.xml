@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- Changeset for creating a new collection -->
+  <changeSet id="1" author="johnydev">
+    <createCollection collectionName="person"/>
+  </changeSet>
+
+  <!-- Changeset for adding a document to the collection -->
+  <changeSet id="2" author="johnydev">
+    <insertManyDocuments collectionName="person">
+      <document>
+        { 
+          "firstname": "John",
+          "lastname": "Doe",
+          "dob": "1990-01-01",
+          "email": "john.doe@example.com"
+        }
+      </document>
+      <!-- Add more documents as needed -->
+    </insertManyDocuments>
+  </changeSet>
+
+  <!-- ... more changeSets for MongoDB ... -->
+
+</databaseChangeLog>
